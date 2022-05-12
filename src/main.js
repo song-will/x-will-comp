@@ -11,13 +11,14 @@ Vue.use(ElementUI)
 let router = null;
 let instance = null;
 
-function render({ container } = {}) {
+function render({ container, superRouter } = {}) {
+
   router = new VueRouter({
     base: window.__POWERED_BY_QIANKUN__ ? '/comp1' : '/',
     mode: 'history',
     routes,
   });
-
+  window.$superRouter = superRouter
   instance = new Vue({
     router,
     render: h => h(App),
