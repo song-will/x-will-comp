@@ -24,7 +24,7 @@ function render({ container, superRouter } = {}) {
     render: h => h(App),
   }).$mount(container ? container.querySelector('#app') : '#app');
 }
-
+console.log('window.__POWERED_BY_QIANKUN__', window.__POWERED_BY_QIANKUN__)
 if (!window.__POWERED_BY_QIANKUN__) {
   render();
 }
