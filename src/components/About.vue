@@ -2,15 +2,20 @@
   <div>
       child-about
       <el-button @click="back">返回主应用</el-button>
+      <img :src="peng" alt="">
   </div>
 
 </template>
 
 <script>
+import peng from '@/assets/images/peng.webp'
+
 export default {
   name: "About",
   data() {
-    return {};
+    return {
+      peng
+    };
   },
   created () {
       console.log('$super', window.$superRouter)

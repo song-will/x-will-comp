@@ -1,3 +1,4 @@
+import '../public-path'
 import App from '@/view/App'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
