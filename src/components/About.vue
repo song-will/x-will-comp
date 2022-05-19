@@ -27,6 +27,8 @@ export default {
   }
 };
 </script>
-
-<style>
+<style lang="less" scoped>
+img {
+  width: 200px;
+}
 </style>
