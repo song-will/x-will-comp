@@ -59,6 +59,13 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.container.ModuleFederationPlugin({
+            name: 'app_comp1_expose',
+            filename: 'remoteEntry.js',
+            remotes: {
+                app_expose: 'app_expose@http://localhost:33900/remoteEntry.js'
+            }
+        }),
         new webpack.DefinePlugin({
             'process.env': {
               NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'production'),
