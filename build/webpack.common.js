@@ -6,7 +6,9 @@ const resolve = require('./utils').resolve
 const packageName = require('../package.json').name;
 
 module.exports = {
-    entry: './src/main.js',
+    entry: {
+        main: './src/main.js'
+    },
     output: {
         filename: '[name].js',
         library: `${packageName}-[name]`,
@@ -58,12 +60,16 @@ module.exports = {
             }
         ]
     },
+    experiments: { topLevelAwait: true },
     plugins: [
         new webpack.container.ModuleFederationPlugin({
-            name: 'app_comp1_expose',
-            filename: 'remoteEntry.js',
+            name: 'compOne',
+            filename: 'comp1.js',
+            // library: { type: "var", name: "app_comp1_expose" },
             remotes: {
-                app_expose: 'app_expose@http://localhost:33900/remoteEntry.js'
+            },
+            exposes: {
+                './TestComp1': './src/components/TestComp1.vue'
             }
         }),
         new webpack.DefinePlugin({
@@ -76,7 +82,9 @@ module.exports = {
         // 生成新的html文件
         new HtmlWebpackPlugin({
             title: 'webpack',
-            template: resolve('index.html')
+            template: resolve('index.html'),
+            chunks: ['app_comp1_expose','main'],
+            chunksSortMode: "manual"
         }),
         new VueLoaderPlugin()
     ]
